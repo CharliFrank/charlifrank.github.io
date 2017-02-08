@@ -173,7 +173,7 @@ _.indexOf = function(arr, val){
           return i;
       } 
     }
-    return -1;
+   return -1;
 };
 
 /** _.filter()
@@ -332,11 +332,13 @@ _.pluck = function(arr, property){
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 _.contains = function(arr, val){
-    if (arr.includes(val) === true){
-        return true;
-    } else {
-        return false;
-    }
+    // if (arr.includes(val) === true){
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+    
+    return arr.includes(val) === true ? true : false;
 }
 
 /** _.every()
@@ -427,21 +429,26 @@ _.reduce = function(arr, test, seed){
     // if(seed === undefined){
     //     prev = _.first(arr, 1);
     // }
-    let rollResult;
+    let reduced;
     if(seed === undefined){
-        rollResult = arr[0];
+        reduced = arr[0];
         
         _.each(arr, function(val, position, collection){
-            position === 0 ? rollResult = rollResult : rollResult = test(rollResult, val, position);
+            //position === 0 ? reduced = reduced : reduced = test(reduced, val, position);
+            if(position === 0){
+                reduced = reduced;
+            } else {
+                reduced = test(reduced, val, position);
+            }
         });
     }
     else { 
-        rollResult = seed;
+        reduced = seed;
         _.each(arr, function(val, position, collection){
-            rollResult = test(rollResult, val, position);
+            reduced = test(reduced, val, position);
         });
     }
-    return rollResult;
+    return reduced;
     
 };
 
