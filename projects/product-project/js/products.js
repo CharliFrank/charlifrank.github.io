@@ -1,88 +1,82 @@
-/* global $ */
-/* global _ */
-$(function() {
-    // ALL YOUR CODE GOES BELOW HERE //
-    $.getJSON('data/product.json', function(product) {
-
-            var $containerDiv = $('<div>').attr('class', 'container-fluid').appendTo('.main');
-            // var $divRows = $('<div>').attr('class', 'row').appendTo('.container-fluid');
-
-
-
-            var $populatedDivRows = _.map(product, function(productVal, index) {
-                return $($('<div>').attr('class', 'row'))
-                    .append($('<div>').attr('class', 'col-md-3')
-                        .append($('<img>').attr('src', 'img/product/thumbs/' + productVal.image)
-                            .attr('class', 'img-responsive')
-                            .attr('id', 'image' + index)
-                            .attr('data-toggle', 'modal')
-                            .attr('data-target', '#myModal')
-                        )).click(function(){
-                            console.log(index)
-                            var modalTitle = $('#myModalLabel').text(productVal.desc)
-                            var modalImage = $('.col-md-3').append($('<img>').attr('src', 'img/product/thumbs/' + productVal.image))
-                            var modalInfo = $('.col-md-7').append($('<p>').text('$' + productVal.price.toFixed(2)))
-                                                            .append($('<p>').text('Specs: \n' + (_.map(productVal.specs, function(specVal, index){return specVal}))))
-                                                            .append($('<p>').text('Stock:' + productVal.stock))
-                            var modalColors = $('.col-md-2').append($('<p>').text('Available Colors:' + (_.map(productVal.availableColors, function(colorVal, index){return colorVal + '\n'}))))
-                            // var modalClose = function(){
-                            //     return $('.close').modal(hide)
-                            // }
-                            
-                        })
-                    .append($('<div>').attr('class', 'col-md-9')
-                        .append($('<h3>').text(productVal.desc))
-                        .append($('<h3>').text('$' + productVal.price.toFixed(2))));
-            })
-            $('.container-fluid').append($populatedDivRows);
-
-        // $('#searchBtn').on('click', function(){
-        //     console.log($('#searchBar').val())
-        // })
-        //  $('#searchBar').on('keyup', function(){
-        //     console.log($('#searchBar').val())
-        //     _.filter(product, function(value, index) {
-        //         if($('#searchBar').val().toLowerCase() == value){
-        //             return value
-        //         }
-        //     })
-        // })    
+/*global $*/
+/*global _*/
+$(function () {
+  // ALL YOUR CODE GOES BELOW HERE //
+  $.getJSON('data/product.json', function(products){
+      
+      var displayProducts = function(products){
+    //   // populate page with products
         
-        
-        
-        var $ul = $('<ul>').attr('class', 'live-search-list').appendTo('.main');
+       return _.map(products, function(productValue, index){
+         return $('<div>').attr('class', 'container-fluid')
+                        .append($('<div>').attr('clas', 'row')
+                            .append($('<div>').attr('class', 'col-md-12')
+                                    .append($('<li>').attr('class', 'data-search-term').append($('<p>').text(productValue.desc)))
+                                    .append($('<div>').attr('class', 'row')
+                                        .append($('<div>').attr('class', 'col-md-7')
+                                            .append($('<li>').attr('class', 'data-search-term').append($('<p>').text(productValue.price).attr('class', 'data-search-term')))
+                                            .append($('<div>').attr('class', 'col-md-8')
+                                                    .append($('<li>').attr('class', 'live-search-list li').attr('class', 'data-search-term').append($('<p>').text(_.map(productValue.specs, function(specs, index){return specs})))))
+                                            .append($('<div>').attr('class', 'col-md-4')
+                                                    .append($('<li>').attr('class', 'data-search-term').append($('<p>').text('Colors: \n' + _.map(productValue.availableColors, function(colors, index){return colors})))
+                                                    .append($('<li>').attr('class', 'data-search-term').append($('<p>').text('Stock: \n' + productValue.stock))))))
+                                        .append($('<div>').attr('class', 'col-md-5')
+                                                .append($('<li>').attr('class', 'data-search-term').append($('<img>').attr('src', 'img/product/thumbs/'+productValue.image).attr('class', 'image'+index).css('width', '300').css('height', '300')                            .attr('id', 'image' + index)
+                                                        // .attr('data-toggle', 'modal')
+                                                        // .attr('data-target', '#myModal')
+                                                        ))))))
+          
+         });
+      };
+      $('#products').append(displayProducts(products));
+      
+      var search = function(products, query){
+        query = query.toLowerCase();
+       
+          return _.filter(products, function(product, index){
             
+            return query === product.type   
+            
+          })
+      }
+     
+      
+    //   $('.main').append(displayProducts(products.splice(10)));
+      var searchBarValue =$('.btn-group').on('click', function(){
+         $('#products').html(displayProducts(search(products, $('input').val())))
+      })
+      
         
-        var $li = _.map(product, function(val, index){
-           var type = $('<li>').attr('class', 'live-search-list li').text(val.type)
-           var desc = $('<li>').attr('class', 'live-search-list li').text(val.desc)
-           var price = $('<li>').attr('class', 'live-search-list li').text(val.price)
-            var color = $('<li>').attr('class', 'live-search-list li').text(val.color)
-            var stock = $('<li>').attr('class', 'live-search-list li').text(val.stock)
-           return type, desc, color
+    _.map(products, function(productValue, index){
+        $('.image'+index).attr('data-toggle', 'modal').attr('data-target', '#myModal').on('click', function(){
+                                        $('.modal-header').html($('<p>').text(products[index].desc))
+                                        $('.modal-body').html($('<img>').attr('src', 'img/product/'+products[index].image).css('width', '250').css('height', '375'))
         })
-        $($ul).append($li)
-        
-        
-        $('.live-search-list li').each(function(){
-           $(this).attr('data-search-term', $(this).text().toLowerCase());
-        });
+       
+    })
+     
 
-         $('.live-search-box').on('keyup', function(){
+  
+    
 
-            var searchTerm = $(this).val().toLowerCase();
-            
-                $('.live-search-list li').each(function(){
-            
-                    if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-            
-                });
-            
-            });
-        })
-        // ALL YOUR CODE GOES ABOVE HERE //
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  })
+  
+  
+  
+  
+  // ALL YOUR CODE GOES ABOVE HERE //
 });

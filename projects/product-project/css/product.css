@@ -1,6 +1,40 @@
-img .img-responsive{
-    width: 100% \9;
-}
 #search-button{
     width: 800px;
+}
+li{
+    list-style: none;
+}
+.col-md-12{
+    /*background: purple;*/
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+}
+.col-md-8{
+    /*background: purple;*/
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+}
+.col-md-7{
+    /*background: purple;*/
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+}
+.col-md-5{
+    /*background: purple;*/
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+}
+.col-md-4{
+    /*background: purple;*/
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+}
+img{
+    width: 300;
+    height: 475;
 }
