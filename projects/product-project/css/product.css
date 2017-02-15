@@ -1,40 +1,101 @@
-#search-button{
-    width: 800px;
+.search-bar{
+    width: 700px;
+    height: 100px;
 }
 li{
     list-style: none;
 }
 .col-md-12{
-    /*background: purple;*/
+    color: white;
     text-align: center;
     vertical-align: middle;
     border: solid;
+    border-color: rgb(128, 255, 255);
 }
 .col-md-8{
-    /*background: purple;*/
+    color: white;
+    /*background: rgb(128, 255, 255);*/
     text-align: center;
     vertical-align: middle;
-    border: solid;
+    /*border: solid;*/
 }
 .col-md-7{
-    /*background: purple;*/
+    color: white;
     text-align: center;
     vertical-align: middle;
-    border: solid;
+    /*border: solid;*/
 }
 .col-md-5{
-    /*background: purple;*/
+    color: white;
     text-align: center;
     vertical-align: middle;
-    border: solid;
+    /*border: solid;*/
 }
 .col-md-4{
-    /*background: purple;*/
+    color: white;
+    /*background: rgb(128, 255, 255);*/
     text-align: center;
     vertical-align: middle;
-    border: solid;
+    /*border: solid;*/
 }
 img{
     width: 300;
     height: 475;
+}
+nav {
+    background: rgb(128, 255, 255);
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: flex;
+    padding: 10px;
+    border: 2px solid rgb(128, 255, 255);
+    border-radius: 25px;
+    
+    }
+body {
+    background-color: rgb(255, 153, 255);
+    color: rgb(45, 45, 45);
+    padding: 5px;
+    font-family: 'Courgette', cursive;
+    }
+button {
+    background: purple;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.btn.default {
+    background: purple;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+main {
+    /*background: rgb(230, 0, 230);*/
+    display: flex;
+    padding: 5px;
+    font-family: 'Courgette', cursive;
+}
+header {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+[id=all-contents] {
+    max-width: 800px;
+    margin: auto;
+  
+}
+#products{
+    background: rgb(230, 0, 230);
+}
+.col-md-7{
+    background-color: rgb(255, 153, 255);
 }
